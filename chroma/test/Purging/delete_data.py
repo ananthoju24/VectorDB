@@ -16,26 +16,10 @@ formatted_date = two_days_ago.strftime("%d-%m-%Y")
 #03-01-2024
 print("formatted_date ",formatted_date)
 filter_by_date = {"field": "timestamp", "operator": "$lt", "value": formatted_date}
-#print(chroma_collection.peek())
-result = chroma_collection.query(
-    query_texts=["Decribe JPMC"],
-    n_results=2,
-    where = {
-    "retention_days": {
-        "$gt": 0
-        }
-    }
-)
 
-total_data=chroma_collection.get()
-#print("\n\n Total data from the db \n\n", result)
-
-
-today = datetime.today()
+#today = datetime.today()
 #formatted_date = today.strftime("%d-%m-%Y")
-result = chroma_collection.query(
-    query_texts=["Decribe JPMC"],
-    n_results=2,
+result = chroma_collection.delete(
     where = {
     "date": {
         "$eq": formatted_date
@@ -43,4 +27,4 @@ result = chroma_collection.query(
     }
 )
 
-print("\n\n With data comparison for the date = ",formatted_date," \n\n",result)
+print("\n\n With data comparison \n\n", result)
